@@ -1,0 +1,4 @@
+helm            3.10.3
+kubectl         1.25.3
+terraform       1.4.2
+
