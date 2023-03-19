@@ -1,4 +1,4 @@
-# calliegofetch
+# Callie Go Fetch
 A worker-centered hiring website
 
 https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/

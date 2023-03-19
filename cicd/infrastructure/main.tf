@@ -37,3 +37,19 @@ output "password" {
   value = aws_iam_user_login_profile.administrator.encrypted_password
   sensitive = true
 }
+
+data "aws_caller_identity" "current" {}
+
+resource "aws_iam_access_key" "administrator" {
+  user    = aws_iam_user.administrator.name
+
+  lifecycle {
+    postcondition {
+      condition = substr(data.aws_caller_identity.current.arn, -4, -1) == "root"
+      error_message = "Delete the root user's access token and replace your Terraform secrets access token with that of the Administrator user."
+    }
+  }
+}
+
+
+
