@@ -1,0 +1,33 @@
+Root_Level:
+  -
+    name: Operations
+    email: me+operations@kimdcottrell.com
+    ou_parent: top_level
+    ou_child: Engineering
+    iam_user_access_to_billing: ALLOW
+  -
+    name: CICD
+    email: me+cicd@kimdcottrell.com
+    ou_parent: top_level
+    ou_child: Exceptions
+    iam_user_access_to_billing: DENY
+
+Workloads_Level:
+  -
+    name: Development
+    email: me+development@kimdcottrell.com
+    ou_parent: workloads_level
+    ou_child: Pre-Prod
+    iam_user_access_to_billing: DENY
+  -
+    name: Staging
+    email: me+staging@kimdcottrell.com
+    ou_parent: workloads_level
+    ou_child: Pre-Prod
+    iam_user_access_to_billing: DENY
+  -
+    name: Production
+    email: me+production@kimdcottrell.com
+    ou_parent: workloads_level
+    ou_child: Prod
+    iam_user_access_to_billing: DENY
