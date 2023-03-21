@@ -22,7 +22,7 @@ resource "aws_organizations_policy" "force_account_to_stay_in_org" {
 }
 
 resource "aws_organizations_policy_attachment" "force_account_to_stay_in_org" {
-  for_each = var.root_children_org_units
+  for_each  = var.root_children_org_units
   policy_id = aws_organizations_policy.force_account_to_stay_in_org.id
   target_id = each.value.id
 }
