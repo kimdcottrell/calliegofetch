@@ -12,11 +12,11 @@ locals {
   workloads_sub_accounts = yamldecode(file("./config/accounts.yaml"))["Workloads_Level"]
 }
 
-resource "aws_organizations_account" "first_level_ou" {
+resource "aws_organizations_account" "root_child_ou" {
   count = length(local.ou_accounts)
   name  = local.ou_accounts[count.index].name
   email = local.ou_accounts[count.index].email
-  parent_id = aws_organizations_organizational_unit.root_level[local.ou_accounts[count.index].ou_child].id
+  parent_id = aws_organizations_organizational_unit.root_children[local.ou_accounts[count.index].ou_child].id
   iam_user_access_to_billing = local.ou_accounts[count.index].iam_user_access_to_billing
 
   lifecycle {
@@ -30,11 +30,11 @@ resource "aws_organizations_account" "first_level_ou" {
   }
 }
 
-resource "aws_organizations_account" "workloads_level_ou" {
+resource "aws_organizations_account" "workloads_child_ou" {
   count = length(local.workloads_sub_accounts)
   name  = local.workloads_sub_accounts[count.index].name
   email = local.workloads_sub_accounts[count.index].email
-  parent_id = aws_organizations_organizational_unit.workloads_level[local.workloads_sub_accounts[count.index].ou_child].id
+  parent_id = aws_organizations_organizational_unit.workloads_children[local.workloads_sub_accounts[count.index].ou_child].id
   iam_user_access_to_billing = local.workloads_sub_accounts[count.index].iam_user_access_to_billing
   lifecycle {
     prevent_destroy = true

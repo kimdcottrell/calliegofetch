@@ -6,7 +6,7 @@
 # TODO: Can a module make it so the resource duplication goes away?
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "aws_organizations_organizational_unit" "root_level" {
+resource "aws_organizations_organizational_unit" "root_children" {
   for_each  = toset( ["Engineering", "Exceptions", "Workloads"] )
   name      = each.key
   parent_id = data.aws_organizations_organization.org.roots[0].id
@@ -18,10 +18,10 @@ resource "aws_organizations_organizational_unit" "root_level" {
   }
 }
 
-resource "aws_organizations_organizational_unit" "workloads_level" {
+resource "aws_organizations_organizational_unit" "workloads_children" {
   for_each  = toset( ["Pre-Prod", "Prod"] )
   name      = each.key
-  parent_id = aws_organizations_organizational_unit.root_level["Workloads"].id
+  parent_id = aws_organizations_organizational_unit.root_children["Workloads"].id
 
   lifecycle {
     prevent_destroy = true
