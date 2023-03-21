@@ -1,2 +1,0 @@
-# TODO: https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
-# incase Terraform Cloud goes nuts over state, forcibly sync state from remote using https://github.com/kimdcottrell/calliegofetch-operations/blob/main/bash/restore-terraform-state.sh
