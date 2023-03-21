@@ -12,7 +12,7 @@ Local-machine specific tooling is reliant on [asdf](https://asdf-vm.com/) and [D
 
 To install all local dependencies, run:
 
-```
+```bash
 # install all the tooling in .tool-versions
 asdf install
 # preview what you're going to run
@@ -23,6 +23,13 @@ awk -F ' ' '{ system("asdf global " $1 " " $2) }' .tool-versions
 asdf current
 # maybe source your shell so the asdf shims in the path get picked up
 ~/.zshrc
+```
+
+Next, configure your [pre-commit hooks](https://pre-commit.com/#quick-start).
+
+```bash
+pre-commit install
+pre-commit run --all-files
 ```
 
 # Overview
