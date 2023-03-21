@@ -1,0 +1,17 @@
+fail_fast: true
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: detect-aws-credentials
+  - repo: local
+    hooks:
+      - id: enforce-yaml-over-yml
+        name: Replace *.yml with *.yaml
+        entry: docker run -i --rm -v $PWD:/app -w "/app" bash:4.4 bash -c 'find . -name "*.yml" -type f -print0 | xargs -0 -I {} echo "mv" {} {}.replace | sed -E "s/yml.replace/yaml/g" | sh'
+        language: system
+        stages:
+          - push
