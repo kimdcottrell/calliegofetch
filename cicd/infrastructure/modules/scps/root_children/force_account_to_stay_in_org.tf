@@ -1,16 +1,13 @@
 data "aws_iam_policy_document" "force_account_to_stay_in_org" {
   statement {
-    sid = "ForceAccountToStayInOrg"
-
-    actions = [
+    sid       = "ForceAccountToStayInOrg"
+    effect    = "Deny"
+    actions   = [
       "organizations:LeaveOrganization",
     ]
-
     resources = [
       "*",
     ]
-
-    effect = "Deny"
   }
 }
 
