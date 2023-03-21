@@ -11,6 +11,7 @@ repos:
     hooks:
       - id: enforce-yaml-over-yml
         name: Replace *.yml with *.yaml
+        entry: docker run -i --rm -v $PWD:/app -w "/app" bash:4.4 bash -c 'find . -name "*.yml" -type f -print0 | xargs -0 -I {} echo "mv" {} {}.replace | sed -E "s/yml.replace/yaml/g" | sh'
         language: system
-        entry: docker run -i bash:latest bash -c 'echo hello'
-        # entry: 'find . -name "*.yml" -type f -print0 | xargs -0 -I {} echo "mv" {} {}.replace | sed -E "s/yml.replace/yaml/g" | sh'
+        stages:
+          - prepare-commit-msg
